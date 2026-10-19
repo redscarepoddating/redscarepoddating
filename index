@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>redscarepod dating official</title>
+<style>
+  body { background:#0b0b0b; color:#e8e0d0; font-family:"Times New Roman", Georgia, serif; margin:0; line-height:1.5; }
+  .wrap { max-width:640px; margin:0 auto; padding:24px 16px 60px; }
+  h1 { color:#c1121f; font-size:2.2em; margin:0; letter-spacing:-1px; text-transform:lowercase; }
+  .tag { color:#888; font-style:italic; margin-bottom:18px; }
+  .bar { background:#c1121f; color:#000; font-family:monospace; padding:4px 8px; font-size:.85em; margin:14px 0; }
+  .box { border:1px solid #c1121f; padding:14px; margin:18px 0; background:#120808; }
+  a { color:#ff4d4d; }
+  label { display:block; margin-top:12px; font-weight:bold; }
+  input, select, textarea { width:100%; box-sizing:border-box; background:#000; color:#e8e0d0; border:1px solid #555; padding:6px; font-family:inherit; font-size:1em; }
+  textarea { height:70px; }
+  button { margin-top:18px; background:#c1121f; color:#fff; border:0; padding:10px 18px; font-size:1.05em; font-family:inherit; cursor:pointer; }
+  button:hover { background:#ff1f2f; }
+  button:disabled { background:#555; cursor:wait; }
+  .small { font-size:.8em; color:#777; }
+  #status { font-family:monospace; color:#3f3; font-size:.85em; min-height:1.2em; margin-top:8px; }
+  .check { display:flex; gap:8px; align-items:flex-start; font-weight:normal; }
+  .check input { width:auto; margin-top:5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Redscarepod Dating</h1>
+  <div class="tag">The official dating site for wiggers and the BPD psueds they yearn for.</div>
+
+  <div class="bar">STATUS: ENGINE v0.3 BETA &mdash; <span id="count">0</span> profiles analyzed</div>
+
+  <p>
+    Welcome! I have 20 grok accounts and have vibe coded a dating app that will take the info you give me and use my proprietary prompts to match you with your perfect match! Remember not to give out doxxable information to your match until you have been ebanging for at least 3 months!
+  </p>
+
+  <div class="box">
+    <b>how it works</b>
+    <ol>
+      <li>fill out the form below to the best of your ability.</li>
+      <li>wait for my Groks to assign you a match (not sure what the timeline will be as my groks run out of tokens very quickly and sometimes my script that changes to a different grok doesn't work so I have to do it manually).</li>
+      <li>You will receive a discord message with your match's preferred method of contact.</li>
+    </ol>
+  </div>
+
+  <form id="f">
+    <label>age (18+ only, no exceptions)
+      <input name="age" type="number" min="18" required></label>
+
+    <label>city / region (feel free to withold)
+      <input name="location" required></label>
+
+    <label>i am
+      <select name="gender">
+        <option>man</option><option>woman</option><option>nonbinary</option><option>other</option>
+      </select></label>
+
+    <label>seeking
+      <select name="seeking">
+        <option>women</option><option>men</option><option>anyone</option>
+      </select></label>
+
+    <label>Dasha or Anna? --- also maybe list your hobbies 💅🏿 people like to know those things
+      <textarea name="opinion" required></textarea></label>
+
+    <label>favorite episode of the pod/ have you even watched it?
+      <input name="thread"></label>
+
+    <label>skype/discord username (this is how you and your match will contact each other)
+      <input name="contact" required></label>
+
+    <label class="check">
+      <input type="checkbox" name="consent" required>
+      <span>i am 18+ and understand that my answers will be read by the operator and shared with a potential match.</span>
+    </label>
+
+    <button type="submit" id="btn">submit to the algorithm</button>
+    <div id="status"></div>
+  </form>
+
+  <p class="small">
+    no refunds because it's free. results not guaranteed. 
+    <br>&copy; Yūrei Genjutsu LLC
+  </p>
+</div>
+
+<script>
+  // totally real profile counter.
+  var n = 0, target = 247 + Math.floor(Math.random() * 40);
+  var t = setInterval(function(){ n += 3; if (n >= target) { n = target; clearInterval(t); } document.getElementById('count').textContent = n; }, 25);
+
+  // If u use my webhook url to spam me you're GAY:
+  var WEBHOOK_URL = "https://discord.com/api/webhooks/1561843282525429790/7kg7nP0pWzTu5dVE00fbBQN_e30QmvWkHl9A_zRadoYJiuEnivTKaYkoqamQ3gIDkrge";
+
+  function clip(v){ v = (v || "").toString().trim(); return v ? v.slice(0, 1000) : "(blank)"; }
+
+  document.getElementById('f').addEventListener('submit', function(e){
+    e.preventDefault();
+    var form = this, s = document.getElementById('status'), btn = document.getElementById('btn');
+    var d = new FormData(form);
+    var lines = ["loading weights...", "parsing vibes...", "cross-referencing red flags...", "consulting the oracle..."];
+    var i = 0;
+    btn.disabled = true;
+    s.textContent = lines[0];
+    var iv = setInterval(function(){ i = (i + 1) % lines.length; s.textContent = lines[i]; }, 600);
+
+    var payload = {
+      username: "the algorithm",
+      allowed_mentions: { parse: [] },
+      embeds: [{
+        title: "new application",
+        color: 12780063,
+        fields: [
+          { name: "contact", value: clip(d.get('contact')) },
+          { name: "age", value: clip(d.get('age')), inline: true },
+          { name: "location", value: clip(d.get('location')), inline: true },
+          { name: "gender / seeking", value: clip(d.get('gender')) + " -> " + clip(d.get('seeking')), inline: true },
+          { name: "dasha or anna / hobbies", value: clip(d.get('opinion')) },
+          { name: "favorite episode", value: clip(d.get('thread')) }
+        ],
+        timestamp: new Date().toISOString()
+      }]
+    };
+
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(r){
+      clearInterval(iv);
+      btn.disabled = false;
+      if (r.ok) { s.textContent = "match queued. check your discord."; form.reset(); }
+      else { s.textContent = "error " + r.status + ": the algorithm is tired. try again."; }
+    }).catch(function(){
+      clearInterval(iv);
+      btn.disabled = false;
+      s.textContent = "network error. try again in a bit.";
+    });
+  });
+</script>
+</body>
+</html>
