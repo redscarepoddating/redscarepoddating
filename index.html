@@ -6,7 +6,7 @@
 <title>redscarepod dating official</title>
 <style>
   body { background:#0b0b0b; color:#e8e0d0; font-family:"Times New Roman", Georgia, serif; margin:0; line-height:1.5; }
-  .wrap { max-width:640px; margin:0 auto; padding:24px 16px 60px; }
+  .wrap { max-width:640px; margin:0 auto; padding:24px 16px 60px; position:relative; z-index:1; }
   h1 { color:#c1121f; font-size:2.2em; margin:0; letter-spacing:-1px; text-transform:lowercase; }
   .tag { color:#888; font-style:italic; margin-bottom:18px; }
   .bar { background:#c1121f; color:#000; font-family:monospace; padding:4px 8px; font-size:.85em; margin:14px 0; }
@@ -22,9 +22,31 @@
   #status { font-family:monospace; color:#3f3; font-size:.85em; min-height:1.2em; margin-top:8px; }
   .check { display:flex; gap:8px; align-items:flex-start; font-weight:normal; }
   .check input { width:auto; margin-top:5px; }
+
+  /* decorative images: fixed to the screen edges, outside the page flow, so the layout is untouched */
+  .deco { display:none; position:fixed; top:0; bottom:0; width:calc((100vw - 672px) / 2 - 16px); flex-direction:column; justify-content:space-evenly; align-items:center; pointer-events:none; z-index:0; }
+  .deco.l { left:8px; }
+  .deco.r { right:8px; }
+  .deco img { max-width:90%; max-height:23vh; object-fit:contain; filter:drop-shadow(0 0 10px rgba(193,18,31,.55)); }
+  .deco img:nth-child(odd)  { transform:rotate(-4deg); }
+  .deco img:nth-child(even) { transform:rotate(3deg); }
+  @media (min-width:1000px) { .deco { display:flex; } }
 </style>
 </head>
 <body>
+
+<div class="deco l" aria-hidden="true">
+  <img src="annakhachiyan.png" alt="">
+  <img src="marseyanna.png" alt="">
+  <img src="annakhachiyan2.png" alt="">
+</div>
+<div class="deco r" aria-hidden="true">
+  <img src="dasha.png" alt="">
+  <img src="marseydasha.png" alt="">
+  <img src="dashablazeit.png" alt="">
+  <img src="dashakneeling.png" alt="">
+</div>
+
 <div class="wrap">
 
   <h1>Redscarepod Dating</h1>
@@ -87,7 +109,7 @@
 </div>
 
 <script>
-  // totally real profile counter.
+  // fake profile counter + fake engine log. pure theater.
   var n = 0, target = 247 + Math.floor(Math.random() * 40);
   var t = setInterval(function(){ n += 3; if (n >= target) { n = target; clearInterval(t); } document.getElementById('count').textContent = n; }, 25);
 
